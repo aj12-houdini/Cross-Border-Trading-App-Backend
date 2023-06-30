@@ -1,16 +1,37 @@
 package com.example.springbootdatabase;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/0.1")
+@CrossOrigin
 public class MainRestController {
 
     @Autowired
     CredentialRepository credentialRepository;
+
+    @Autowired
+    UsertypeRepository usertypeRepository;
+
+    @GetMapping("getusertype")
+    public List<Usertype> getUserType(@RequestParam("username") String username){
+        return usertypeRepository.findByUsername(username);
+    }
+
+    @GetMapping("getdummy")
+    public Userdetail getDummyUser(){
+        Userdetail userdetail = new Userdetail();
+        userdetail.setUsername("aj10");
+        userdetail.setFname("Aayush");
+        userdetail.setLname("Juyal");
+        userdetail.setEmail("@gmail.com");
+        return userdetail;
+    }
+
     @GetMapping("/save")
     public String save(){
         Credential credential = new Credential();

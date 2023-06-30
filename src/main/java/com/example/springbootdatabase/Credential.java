@@ -15,7 +15,6 @@ public class Credential {
     @Column(name = "password", length = 50)
     private String password;
 
-
     public void setUsername(String username) {
         this.username = username;
     }
